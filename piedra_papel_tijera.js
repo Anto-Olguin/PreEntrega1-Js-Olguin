@@ -35,5 +35,5 @@ while (jugarOtraVez) {
     `La computadora elige ${eleccionComputadora}\nEl jugador elige ${eleccionJugador}\n${resultado}`
   );
 
-  jugarOtraVez = confirm("¿Quieres jugar otra vez?");
+  jugarOtraVez = confirm("¿Queres jugar otra vez?");
 }
