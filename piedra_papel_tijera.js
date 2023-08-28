@@ -1,51 +1,39 @@
-let computadora;
-let eleccionComputadora;
-let jugador;
-let eleccionJugador;
-let resultado;
+const opciones = ["piedra", "papel", "tijera"];
 
 function aleatorio(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-computadora = aleatorio(1, 3);
-
-if (computadora === 1) {
-  eleccionComputadora = "piedra";
-} else if (computadora === 2) {
-  eleccionComputadora = "papel";
-} else if (computadora === 3) {
-  eleccionComputadora = "tijera";
+function obtenerEleccionComputadora() {
+  return opciones[aleatorio(0, 2)];
 }
 
-jugador = prompt("Escribi una de las opciones:\nPiedra\nPapel\nTijera").toLowerCase();
-
-if (jugador === "piedra") {
-  eleccionJugador = "piedra";
-} else if (jugador === "papel") {
-  eleccionJugador = "papel";
-} else if (jugador === "tijera") {
-  eleccionJugador = "tijera";
+function obtenerResultado(eleccionComputadora, eleccionJugador) {
+  if (eleccionComputadora === eleccionJugador) {
+    return "EMPATE -_-";
+  } else if (
+    (eleccionComputadora === "piedra" && eleccionJugador === "papel") ||
+    (eleccionComputadora === "papel" && eleccionJugador === "tijera") ||
+    (eleccionComputadora === "tijera" && eleccionJugador === "piedra")
+  ) {
+    return "GANASTE! *u*";
+  } else {
+    return "PERDISTE :(";
+  }
 }
 
-if (eleccionComputadora === "piedra" && eleccionJugador === "piedra") {
-  resultado = "EMPATE -_-";
-} else if (eleccionComputadora === "papel" && eleccionJugador === "papel") {
-  resultado = "EMPATE -_-";
-} else if (eleccionComputadora === "tijera" && eleccionJugador === "tijera") {
-  resultado = "EMPATE -_-";
-}else if (eleccionComputadora === "piedra" && eleccionJugador === "papel") {
-  resultado = "GANASTE! *u*";
-} else if (eleccionComputadora === "papel" && eleccionJugador === "tijera") {
-  resultado = "GANASTE! *u*";
-} else if (eleccionComputadora === "tijera" && eleccionJugador === "piedra") {
-  resultado = "GANASTE! *u*";
-} else if (eleccionComputadora === "piedra" && eleccionJugador === "tijera") {
-  resultado = "PERDISTE :(";
-} else if (eleccionComputadora === "papel" && eleccionJugador === "piedra") {
-  resultado = "PERDISTE :(";
-} else if (eleccionComputadora === "tijera" && eleccionJugador === "papel") {
-  resultado = "PERDISTE :(";
-}
+let jugarOtraVez = true;
 
-alert("La computadora elige " + eleccionComputadora + "\nEl jugador elige " + eleccionJugador + "\n" + resultado);
+while (jugarOtraVez) {
+  const eleccionComputadora = obtenerEleccionComputadora();
+  const eleccionJugador = prompt(
+    "Escribi una de las opciones:\nPiedra\nPapel\nTijera"
+  ).toLowerCase();
+  const resultado = obtenerResultado(eleccionComputadora, eleccionJugador);
+
+  alert(
+    `La computadora elige ${eleccionComputadora}\nEl jugador elige ${eleccionJugador}\n${resultado}`
+  );
+
+  jugarOtraVez = confirm("¿Quieres jugar otra vez?");
+}
